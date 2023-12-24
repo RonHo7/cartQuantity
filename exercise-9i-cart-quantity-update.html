@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+  <header>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Quantity Update</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    </style>
+  </header>
+  <body>
+    <!--
+    <p>Your cart</p>
+    <button onclick="document.querySelector('.js-display-cart-quantity')
+    .innerHTML = `Cart quantity: ${cartQuantity}`;">Show Quantity</button>
+    -->
+    <button onclick="updateCartQuantity(1)">Add to cart</button>
+    <button onclick="updateCartQuantity(2)">+ 2</button>
+    <button onclick="updateCartQuantity(3)">+ 3</button>
+    <button onclick="updateCartQuantity(4)">+ 4</button>
+    <button onclick="updateCartQuantity(5)">+ 5</button><br><br>
+    <button onclick="updateCartQuantity(-1)">Remove from cart</button>
+    <button onclick="updateCartQuantity(-2)">- 2</button>
+    <button onclick="updateCartQuantity(-3)">- 3</button><br><br>
+    <button onclick="cartQuantity = 0; updateCartQuantity(0)">Reset Cart</button>
+
+    <p class="js-display-cart-quantity"></p>
+    <p class="js-cart-quantity-alert"></p>
+    <script>
+      let cartQuantity = 0;
+      document.querySelector('.js-display-cart-quantity')
+        .innerHTML = `Your cart: ${cartQuantity}`;
+
+      function updateCartQuantity(number) {
+        cartQuantity += number;
+        if (cartQuantity < 0) {
+          cartQuantity = 0;
+          document.querySelector('.js-cart-quantity-alert')
+          .innerHTML = 'Not enough items in the cart.';
+        } else if (cartQuantity > 10) {
+          cartQuantity = 10;
+          document.querySelector('.js-cart-quantity-alert')
+          .innerHTML = 'The cart is full.';
+        } else {
+          document.querySelector('.js-cart-quantity-alert')
+          .innerHTML = '';
+        }
+        
+          /*
+          if (number === -1) {
+              console.log('1 item was removed');
+            } else if (number === -2 || number === -3) {
+              console.log(`${-number} items were removed`);
+            }
+          */
+        document.querySelector('.js-display-cart-quantity')
+              .innerHTML = `Your cart: ${cartQuantity}`;
+          
+        }
+
+      /* another approach
+        let cartQuantity = 0;
+
+      function updateCartQuantity(change) {
+        if (cartQuantity + change > 10) {
+          alert('The cart is full');
+          return;
+        }
+
+        if (cartQuantity + change < 0) {
+          alert('Not enough items in the cart');
+          return;
+        }
+
+        cartQuantity += change;
+        console.log(`Cart quantity: ${cartQuantity}`);
+      }
+
+      /* TESTING
+      let result = '';
+      function calculationTesting(input) {
+        result = 4 + input;
+        return result;
+      }
+      console.log(calculationTesting(-2));
+      */
+    </script>
+  </body>
+</html>
